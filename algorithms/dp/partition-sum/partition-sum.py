@@ -114,3 +114,33 @@ test = [1, 5, 10, 1, 5]
 print(canPartition(test)) # True
 test = [1, 2, 3, 5]
 print(canPartition(test)) # False
+
+# Other Solutions
+
+# Most Optimal Solution:
+def canPartition(nums):
+    total = sum(nums)
+    if total % 2 != 0:
+        return False
+
+    prev = set()
+    prev.add(0)
+    target = total // 2
+
+    for num in nums:
+        curr = set()
+
+        for x in prev:
+            newSum = x + num
+            if newSum == target:
+                return True
+            curr.add(newSum)
+            curr.add(x)
+        prev = curr
+    
+    return False
+
+test = [1, 5, 11, 5]
+print(canPartition(test)) # True
+test = [1, 2, 3, 5]
+print(canPartition(test)) # False
