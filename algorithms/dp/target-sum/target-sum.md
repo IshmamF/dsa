@@ -36,17 +36,17 @@ Answer: Those are no longer possibilities when we add our current value. We can'
 On the third iteration, we are now looking at all possible sums with [1, 1, 1] <br>
 For this one, I'll highlight how the hashmap changes <br>
 2 + 1 = 3 <br>
-{3: 1}
+{3: 1} <br>
 2 - 1 = 1 <br>
-{1: 1, 3: 1}
+{1: 1, 3: 1} <br>
 -2 + 1 = -1 <br>
-{1: 1, 3: 1, -1: 1}
+{1: 1, 3: 1, -1: 1} <br>
 -2 - 1 = -3 <br>
-{1: 1, 3: 1, -1: 1, -3: 1}
+{1: 1, 3: 1, -1: 1, -3: 1} <br>
 0 + 1 = 1 <br>
-{1: 3, 3: 1, -1: 1, -3: 1}
+{1: 3, 3: 1, -1: 1, -3: 1} <br>
 0 - 1 = -1 <br>
-{1: 3, 3: 1, -1: 3, -3: 1}
+{1: 3, 3: 1, -1: 3, -3: 1} <br>
 Which leaves us with the following at the end of the iteration: <br>
 {1: 3, 3: 1, -1: 3, -3: 1} <br>
 
