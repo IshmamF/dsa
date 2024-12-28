@@ -52,3 +52,17 @@ Which leaves us with the following at the end of the iteration: <br>
 
 If you noticed, when we did 0 + 1 and 0 - 1, the number of ways to reach 1 or -1 went from 1 to 3. <br>
 This is because there are 2 possible ways to get to 0 with just [1, 1]. Adding the next value ([1, 1, 1]) means there should be 2 possible ways to get to that value as well aka +1 -1 +1 and -1 +1 +1 (same applies to subtracting the next value) <br>
+
+## Top Down Memoization Solution
+
+- Typically in top down approaches, we start with the value we want, in our case target, and work our way downwards. 
+- We know we have two states to check, the index to represent the current value in the array and a possible sum for values until that index.
+- We're making two decisions, to either add the current value or to subtract the current value
+- Our base case should be if we've gone through the whole list (nums) and if we saw the same state again.
+- Drawing out the tree should help us see that , a state would be represented not just by the value but also the index.
+- Walkthrough: ![Top Down Recursion](./images/topdownrecursion.png)
+- What does each value represent on the tree? It means we're finding the number of ways to get that value after exhausting all items in our nums list.
+- For instance, we have the value 2 and the last item in the list is also 2, that means there's one way to reach 2 (which is to subtract the item aka 2)
+- Hence, the number in root is obviously our target but the return value will be the number of ways to get there since we're adding the first item or subtracting the first item, and then the question becomes what are the possible ways to reach those values with the rest of the list, and so on. 
+- Highlighted in orange, we notice that the same "target" appears multiple times in the same level. Additionally, in the red, we can see that the orange appears in it , and the red is also repeated. 
+- If we get the same value at the same level , it means we already know how many ways we can get to that value using all the possible items. Hence we know that , in our memoization, we would save the level (aka number of items we exhausted or index) and the value (current target) as the key. If we just did the current target, that would be incorrect because it doesn't take into consideration how many items in the list we used to get that target. 
