@@ -11,31 +11,32 @@ def findMaxForm(strs, m, n):
     # i for index
     # m for number of 0s left
     # n for number of 1s left
-    # curr to hold the current number of subsets
+    hashmap = {}
+
+    for i, s in enumerate(strs):
+        hashmap[i] = Counter(s)
+
     memo = {}
-    def dfs(i, m, n, curr):
-        if i >= len(strs) or (m < 0 or n < 0):
-            return len(curr)
+    def dfs(i, m, n):
+        if i >= len(strs):
+            return 0
         if (i, m, n) in memo:
             return memo[(i, m, n)]
         
-        count = Counter(strs[i])
-        if '1' not in count:
-            count['1'] = 0
-        elif '0' not in count:
-            count['0'] = 0
+        count = hashmap[i]
+        zeros = count.get('0', 0)
+        ones = count.get('1', 0)
         
-        dontIncludeSubset = dfs(i+1, m, n, curr)
-        if n >= count['1'] and m >= count['0']:
-            curr.append(strs[i])
-            includeSubset = dfs(i+1, m - count['0'], n - count['1'], curr)
-            curr.pop()
-            memo[(i, m, n)] = max(includeSubset, dontIncludeSubset)
-            return memo[(i, m, n)]
-        memo[(i, m, n)] = dfs(i+1, m, n, curr)
+        dontIncludeSubset = dfs(i+1, m, n)
+
+        includeSubset = float("-inf")
+        if n >= ones and m >= zeros:
+            includeSubset = 1 + dfs(i+1, m - zeros, n - ones)
+
+        memo[(i, m, n)] = max(includeSubset, dontIncludeSubset)
         return memo[(i, m, n)]
 
-    return dfs(0, m, n, [])
+    return dfs(0, m, n)
 
 strs = ["10","0001","111001","1","0"]
 m, n = 5, 3
