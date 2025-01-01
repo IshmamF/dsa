@@ -1,5 +1,6 @@
 # Problem Link: https://leetcode.com/problems/last-stone-weight-ii/description/
 
+# My solution
 def lastStoneWeightII(stones):
         
     if len(stones) == 1:
@@ -31,3 +32,21 @@ print(output)
 stones = [31,26,33,21,40]
 output = lastStoneWeightII(stones)
 print(output)
+
+# Neetcode Top Down Solution
+
+def lastStoneWeightII(stones):
+    stoneSum = sum(stones)
+    target = (stoneSum + 1) // 2
+    dp = {}
+
+    def dfs(i, total):
+        if total >= target or i == len(stones):
+            return abs(total - (stoneSum - total))
+        if (i, total) in dp:
+            return dp[(i, total)]
+
+        dp[(i, total)] = min(dfs(i + 1, total), dfs(i + 1, total + stones[i]))
+        return dp[(i, total)]
+
+    return dfs(0, 0)
