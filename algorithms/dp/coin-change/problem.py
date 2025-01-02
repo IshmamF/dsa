@@ -95,4 +95,35 @@ def coinChange(coins, amount):
 
 testFunc(coinChange)
 
+# Bottom Up Approach
+
+def coinChange(coins, amount):
+
+    dp = [[-1] * (amount + 1) for _ in range(len(coins) + 1)]
+    dp[0][0] = 0
+
+    for k in range(1, amount + 1):
+        firstCoin = coins[0]
+        if k >= firstCoin and dp[0][k-firstCoin] != -1:
+            dp[0][k] = 1 + dp[0][k-firstCoin]
+
+    for i in range(1, len(coins) + 1):
+        currentCoin = coins[i-1]
+        for j in range(amount + 1):
+            if j == 0:
+                dp[i][j] = 0
+                continue
+            above = dp[i-1][j]
+            if currentCoin <= j and dp[i][j-currentCoin] != -1:
+                leftSide = 1 + dp[i][j-currentCoin]
+                dp[i][j] = min(above, leftSide) if above != -1 else leftSide
+            else:
+                dp[i][j] = above
+    
+    return dp[len(coins)][amount]
+
+testFunc(coinChange)
+
+
+    
             
