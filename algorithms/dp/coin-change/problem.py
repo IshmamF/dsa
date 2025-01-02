@@ -55,3 +55,44 @@ def coinChange(coins, amount):
     return minimumCoins if minimumCoins != float('inf') else -1
 
 testFunc(coinChange)
+
+# Hashset Approach
+def coinChange(coins, amount):
+
+    amountLeft = set()
+    amountLeft.add((amount, 0))
+    possibleMinimums = -1
+    visited = {}
+    
+
+    while amountLeft:
+        amt, cnt = amountLeft.pop()
+
+        if amt in visited and cnt >= visited[amt]:
+           continue
+        visited[amt] = cnt
+
+        if amt == 0:
+            if possibleMinimums == -1:
+                possibleMinimums = cnt
+            else:
+                possibleMinimums = min(possibleMinimums,cnt)
+
+        for n in coins:
+            diff = amt -  n
+            if diff > 0:
+                if diff in visited:
+                    if cnt + 1 < visited[diff]:
+                        amountLeft.add((diff, cnt + 1))
+                else:
+                    amountLeft.add((diff, cnt + 1))
+            elif diff == 0:
+                if possibleMinimums == -1:
+                    possibleMinimums = cnt + 1
+                else:
+                    possibleMinimums = min(possibleMinimums,cnt + 1)
+    return possibleMinimums
+
+testFunc(coinChange)
+
+            
