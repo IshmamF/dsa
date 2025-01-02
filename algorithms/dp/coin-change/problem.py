@@ -124,6 +124,37 @@ def coinChange(coins, amount):
 
 testFunc(coinChange)
 
+# Bottom Up Approach, Space Optimized
+
+def coinChange(coins, amount):
+
+    dp = [-1] * (amount + 1)
+    dp[0] = 0
+
+    for k in range(1, amount + 1):
+        firstCoin = coins[0]
+        if k >= firstCoin and dp[k-firstCoin] != -1:
+            dp[k] = 1 + dp[k-firstCoin]
+
+    for i in range(1, len(coins) + 1):
+        currentCoin = coins[i-1]
+        newDP = [-1] * (amount + 1)
+        for j in range(amount + 1):
+            if j == 0:
+                newDP[j] = 0
+                continue
+            above = dp[j]
+            if currentCoin <= j and newDP[j-currentCoin] != -1:
+                leftSide = 1 + newDP[j-currentCoin]
+                newDP[j] = min(above, leftSide) if above != -1 else leftSide
+            else:
+                newDP[j] = above
+        dp = newDP
+    
+    return dp[amount]
+
+testFunc(coinChange)
+
 
     
             
