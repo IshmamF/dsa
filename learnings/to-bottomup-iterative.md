@@ -1,0 +1,15 @@
+## Steps
+- Figure out the bounds of the parameters
+  - lowest and highest they can be
+  - base cases and starting arguments 
+- FIgure out what the order of the iteration is 
+  - what does your parameters need to have computed before for your "recursion" to work
+  - do you need smaller values first or big values first
+    - if its small first, we simply iterate normally in a for loop with our bounds
+    - otherwise, we go in reverse
+- Side Note: Can't have negative values to index arrays
+- Replace recursive calls with dp (table) values
+  - in base cases, instead of returning, just store computed value in table and continue to next term
+- To save space, identify constant dependencies 
+  - aka there are constant changes such as i + 1
+  - must be in outer loop
