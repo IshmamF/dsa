@@ -21,5 +21,5 @@ def coinCombination(n: int, target: int, coins: List[int]) -> int:
     
     return recurse(0)
 
-val = coinCombination(3, 100, [2, 3, 5])
+val = coinCombination(3, 0, [2, 3, 5])
 print(val)
