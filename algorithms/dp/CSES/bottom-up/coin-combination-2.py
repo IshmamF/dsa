@@ -5,9 +5,9 @@ coins = list(map(int, sys.stdin.readline().split()))
 dp = [0] * (target + 1)
 dp[0] = 1
 MOD = 10**9+7
-coins.sort()
-for amount in range(1, target + 1):
-    for coin in coins:
+
+for coin in coins:
+    for amount in range(coin, target + 1):
         remaining = amount - coin
         if remaining < 0:
             break
