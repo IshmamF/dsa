@@ -30,5 +30,5 @@ def coinCombination2(n: int, target: int, coins: List[int]) -> int:
     return recurse(0, defaultdict(int))
 
 
-val = coinCombination2(3, 9, [2, 3, 5])
+val = coinCombination2(3, 100000, [2, 3, 5])
 print(val)

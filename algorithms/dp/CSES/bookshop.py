@@ -20,7 +20,7 @@ def bookShop(n:int, max_price: int, book_prices: List[int], num_pages: List[int]
     return tryBookComb(0, 0)
 
 n = 100
-max_price = 100
+max_price = 10000
 book_prices = [4] * n
 num_pages = [4] * n
 print(bookShop(n, max_price, book_prices, num_pages))

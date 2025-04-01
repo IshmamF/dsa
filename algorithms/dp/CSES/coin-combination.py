@@ -1,4 +1,8 @@
 from typing import List
+import sys
+ 
+sys.setrecursionlimit(10**7)
+
 def coinCombination(n: int, target: int, coins: List[int]) -> int:
     '''
     similar to minimize coins but everytime we hit target, we return 1
@@ -21,5 +25,8 @@ def coinCombination(n: int, target: int, coins: List[int]) -> int:
     
     return recurse(0)
 
-val = coinCombination(3, 100, [2, 3, 5])
+s = input()
+nums = s.split(' ')
+vals = [int(a) for a in input().split(' ')]
+val = coinCombination(int(nums[0]), int(nums[1]), vals)
 print(val)
