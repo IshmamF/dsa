@@ -15,14 +15,14 @@ def removingDigits(num:int) -> int:
         maxDigit = max(maxDigit, input)
         return maxDigit
 
-    def recurse(curr_digit: int) -> int:
-        if curr_digit == 0:
-            return 0 
-        
-        maxDigit = convert_int_to_list(curr_digit)
-        return 1 + recurse(curr_digit-maxDigit)
+    count = 0
+    while num != 0:
+        maxDigit = convert_int_to_list(num)
+        num = num-maxDigit
+        count += 1
     
-    return recurse(num)
+    return count
 
-val = removingDigits(123)   
+n = int(input())
+val = removingDigits(n)   
 print(val)

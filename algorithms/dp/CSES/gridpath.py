@@ -1,25 +1,27 @@
-from typing import List
-grid = [['•', '•', '•', '•'],
-        ['•', '*', '•', '•'],
-        ['•', '•', '•', '*'],
-        ['*', '•', '•', '•']]
+n = int(input())
+grid = []
 
-def gridPath(n: int, grid: List[List[str]]) -> int:
+for _ in range(n):
+    row = input()
+    grid.append(list(row))
+
+MOD = 10**9 + 7
+
+def gridPath(n, grid):
     dp = {}
     
     def findPaths(x: int = 0, y: int = 0) -> int:
         if (x, y) in dp:
             return dp[(x,y)]
-        if x == n - 1 and y == n - 1:
+        if x == n - 1 and y == n - 1 and grid[x][y] != '*':
             return 1
         if x >= n or y >= n or grid[x][y] == '*':
             return 0
             
-        count = 0
-        count += findPaths(x + 1, y)
-        count += findPaths(x, y + 1)
+        count = (findPaths(x + 1, y) + findPaths(x, y + 1)) % MOD
         
         dp[(x,y)] = count
         return count 
     return findPaths()
-print(gridPath(4, grid))
+
+print(gridPath(n, grid))
